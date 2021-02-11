@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PIPARIK</title>
+</head>
+<body>
+<style>
+    .inp{
+        font-weight: 700;
+        width: 50%;
+        background: red;
+        color: white;
+
+    }
+</style>
+<center><div id="image_holder" style="display:none">
+    <div class="img" >
+        <img src="pic.jpg">
+
+    </div>
+</div>
+</center>
+<center><input class=" inp" type="button" value="Нажми чтобы получить Пипярик" name="show" id="show" onclick="show_image()" /></center>
+
+<script type="text/javascript">
+    function show_image()
+    {
+        document.getElementById("image_holder").style.display="block";
+    }
+</script>
+</body>
+</html>
