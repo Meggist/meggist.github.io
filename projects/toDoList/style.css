@@ -1,0 +1,38 @@
+.title{
+    display: inline-block;
+    width: 768px;
+    font-family: 'Hammersmith One', sans-serif;
+    color: black;
+    font-size: 150px;
+    text-align: center;
+}
+
+.form{
+    width: 400px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.deleteButton{
+    color: white;
+    background: red;
+    width: 20px;
+    padding: 0 ;
+}
+
+.formTitle{
+    font-size: 50px;
+    color: black;
+    font-family: 'Hammersmith One', sans-serif;
+    margin-top: 20px;
+}
+
+.main{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    background: mediumslateblue;
+}
