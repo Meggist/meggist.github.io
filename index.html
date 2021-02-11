@@ -6,18 +6,36 @@
 </head>
 <body>
 <style>
-    .inp{
-        font-weight: 700;
-        width: 50%;
+    .inp {
+        font-size: xx-large;
+        padding: 40px;
+        width: 700px;
         background: red;
         color: white;
-
+        border-radius: 5px;
     }
+    .img{
+        display: flex ;
+        justify-content: space-around;
+    }
+
+    .rainbow{
+        background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 200px;
+        line-height: 40px;
+        display: none;
+        margin-bottom: 20px;
+        padding: 80px;
+    }
+
 </style>
+<center><div id="rainbow" class="rainbow">Пипярик</div></center>
 <center><div id="image_holder" style="display:none">
     <div class="img" >
-        <img src="pic.jpg">
-
+        <img src="pic.jpg" alt="Sex" width="450px">
+        <img src="cat2.jpg" alt="cat" width="450px">
     </div>
 </div>
 </center>
@@ -27,6 +45,7 @@
     function show_image()
     {
         document.getElementById("image_holder").style.display="block";
+        document.getElementById("rainbow").style.display="block";
     }
 </script>
 </body>
