@@ -13,31 +13,31 @@
     width: 768px;
     font-family: 'Hammersmith One', sans-serif;
     color: black;
-    font-size: 150px;
+    font-size: 180px;
     text-align: center;
+    padding: 0;
 }
 
 .form{
+    margin-top: 15px;
     width: 400px;
     padding: 10px;
-    margin-top: 10px;
 }
 
 .deleteButton{
     color: white;
     background: red;
-    width: 20px;
-    padding: 0 ;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin-left: 15px;
+    float: right;
 }
 
 .formTitle{
-    font-size: 50px;
+    font-size: 75px;
     color: black;
     font-family: 'Hammersmith One', sans-serif;
-    margin-top: 20px;
 }
-
-
 
 body{
     align-items: center;
@@ -46,26 +46,38 @@ body{
     width: 100%;
     background: mediumslateblue;
 }
+
+.task{
+    background: white;
+    font-size: 25px;
+    color: black;
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+.list{
+    background: white;
+}
     </style>
-<div class="title" id="wrap">To Do list</div>
+<div class="title" >ToDo list</div>
     <div class="formTitle">Напишите ваше задание</div>
    <div>
         <input type="text" id="value" class="form" name="getValue" />
         <input type="button" style="padding: 10px" id="conf" value="Добавить" onclick="addTask()">
        </div>
 
-    <ol id = "demo">
+    <ol id = "demo" class="list">
 
     </ol>
 
 <script>
-    let id = 0;
+  let id = 0;
 function addTask(){
     id++;
 
         let task = document.getElementById('value').value;
         let node = document.createElement("LI");
         node.id = id.toString();
+        node.className = "task";
         let textNode = document.createTextNode(task);
         node.appendChild(textNode);
 
@@ -83,6 +95,8 @@ function addTask(){
 function deleteTask (){
     document.getElementById(this.id).remove();
 }
+
+
 
 
 </script>
