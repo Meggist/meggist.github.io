@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
     <title>toDoList</title>
 </head>
 <body>
@@ -11,32 +11,50 @@
 .title{
     display: inline-block;
     width: 768px;
-    font-family: 'Hammersmith One', sans-serif;
-    color: black;
-    font-size: 180px;
+    font-family: 'Montserrat', sans-serif;
+    color: #0A65FF;
+    font-size: 170px;
     text-align: center;
     padding: 0;
 }
 
 .form{
     margin-top: 15px;
-    width: 400px;
+    width: 760px;
+    padding: 20px;
+    font-size: 30px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.button{
+    font-size: 30px;
     padding: 10px;
+    background: #EBEEFF;
+}
+
+.forms{
+    display: flex;
+    flex-direction: column;
 }
 
 .deleteButton{
-    color: white;
-    background: red;
-    padding: 5px 10px;
-    font-size: 15px;
-    margin-left: 15px;
     float: right;
+    width: 150px;
+    height: 60px;
+    text-align: center;
+    color: red;
+    background: white;
+    border: none;
+    font-size: 30px;
+    font-weight:bold;
+    margin-right: 10px;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .formTitle{
-    font-size: 75px;
-    color: black;
-    font-family: 'Hammersmith One', sans-serif;
+    font-size: 70px;
+    color: #0A65FF;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body{
@@ -44,25 +62,31 @@ body{
     display: flex;
     flex-direction: column;
     width: 100%;
-    background: mediumslateblue;
+    background: #050A24;
 }
 
 .task{
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 10px 0;;
+    height: 50px;
+    text-align: center;
+    width: 650px;
     background: white;
-    font-size: 25px;
+    font-size: 40px;
     color: black;
-    font-family: 'Hammersmith One', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .list{
-    background: white;
+    list-style-type: none;
 }
     </style>
 <div class="title" >ToDo list</div>
     <div class="formTitle">Напишите ваше задание</div>
-   <div>
+   <div class="forms">
         <input type="text" id="value" class="form" name="getValue" />
-        <input type="button" style="padding: 10px" id="conf" value="Добавить" onclick="addTask()">
+        <input type="button" class="button"  id="conf" value="Добавить" onclick="addTask()">
        </div>
 
     <ol id = "demo" class="list">
@@ -83,7 +107,7 @@ function addTask(){
 
         let deleteButton = document.createElement('input')
         deleteButton.setAttribute('type', 'button');
-        deleteButton.setAttribute('value', 'X');
+        deleteButton.setAttribute('value', 'Удалить');
         deleteButton.id = id.toString();
 
         deleteButton.className = "deleteButton";
@@ -96,7 +120,14 @@ function deleteTask (){
     document.getElementById(this.id).remove();
 }
 
-
+(function() {
+    document.getElementById('value').addEventListener('keydown', function(e) {
+        if (e.keyCode === 13) {
+            // можете делать все что угодно со значением текстового поля
+            addTask();
+        }
+    });
+})();
 
 
 </script>
