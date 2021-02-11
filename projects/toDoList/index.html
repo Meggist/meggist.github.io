@@ -4,10 +4,49 @@
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <title>toDoList</title>
 </head>
 <body>
+    <style>
+.title{
+    display: inline-block;
+    width: 768px;
+    font-family: 'Hammersmith One', sans-serif;
+    color: black;
+    font-size: 150px;
+    text-align: center;
+}
+
+.form{
+    width: 400px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.deleteButton{
+    color: white;
+    background: red;
+    width: 20px;
+    padding: 0 ;
+}
+
+.formTitle{
+    font-size: 50px;
+    color: black;
+    font-family: 'Hammersmith One', sans-serif;
+    margin-top: 20px;
+}
+
+.main{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+    background: mediumslateblue;
+}
+    </style>
 <div class="main">
 <div class="title" id="wrap">To Do list</div>
     <div class="formTitle">Напишите ваше задание</div>
@@ -21,7 +60,33 @@
     </ol>
 </div>
 
-<script src="main.js">
+<script>
+    let id = 0;
+function addTask(){
+    id++;
+
+        let task = document.getElementById('value').value;
+        let node = document.createElement("LI");
+        node.id = id.toString();
+        let textNode = document.createTextNode(task);
+        node.appendChild(textNode);
+
+        let deleteButton = document.createElement('input')
+        deleteButton.setAttribute('type', 'button');
+        deleteButton.setAttribute('value', 'X');
+        deleteButton.id = id.toString();
+
+        deleteButton.className = "deleteButton";
+
+        document.getElementById("demo").appendChild(node).appendChild(deleteButton);
+        document.getElementById('value').value = '';
+        deleteButton.onclick = deleteTask;
+}
+function deleteTask (){
+    document.getElementById(this.id).remove();
+}
+
+
 </script>
 </body>
 </html>
