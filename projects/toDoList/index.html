@@ -20,7 +20,7 @@
 
 .form{
     margin-top: 15px;
-    width: 760px;
+    width: 560px;
     padding: 20px;
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
@@ -35,6 +35,21 @@
 .forms{
     display: flex;
     flex-direction: column;
+}
+
+.deleteList{
+    border: none;
+    border-radius: 15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
+    background: red;
+    width: 150px;
+    height: 50px;
+}
+
+.wholeForm{
+    display: flex;
+    align-items: center;
 }
 
 .deleteButton{
@@ -53,7 +68,7 @@
 
 .formTitle{
     text-align: center;
-    font-size: 110px;
+    font-size: 65px;
     color: #0A65FF;
     font-family: 'Montserrat', sans-serif;
 }
@@ -85,10 +100,12 @@ body{
     </style>
 <div class="title" >ToDo list</div>
     <div class="formTitle">Напишите ваше задание</div>
+
    <div class="forms">
         <input type="text" id="value" class="form" name="getValue" />
         <input type="button" class="button"  id="conf" value="Добавить" onclick="addTask()">
        </div>
+        <input type="button" id="deleteList" class="deleteList" value="Очистить список" onclick="deleteList()">
 
     <ol id = "demo" class="list">
 
@@ -96,9 +113,10 @@ body{
 
 <script>
   let id = 0;
-function addTask(){
-    id++;
 
+function addTask(){
+    if (document.getElementById('value').value !== ''){
+    id++;
         let task = document.getElementById('value').value;
         let node = document.createElement("LI");
         node.id = id.toString();
@@ -110,18 +128,20 @@ function addTask(){
         deleteButton.setAttribute('type', 'button');
         deleteButton.setAttribute('value', 'Удалить');
         deleteButton.id = id.toString();
-
+        deleteButton.onclick = deleteTask;
         deleteButton.className = "deleteButton";
 
-        document.getElementById("demo").appendChild(node).appendChild(deleteButton);
+        let row = document.getElementById("demo").appendChild(node).appendChild(deleteButton);
+
         document.getElementById('value').value = '';
-        deleteButton.onclick = deleteTask;
+        localStorage.setItem(`${id.toString()}`, row)
+    }
 }
 function deleteTask (){
     document.getElementById(this.id).remove();
 }
 
-(function() {
+(function keyEnter() {
     document.getElementById('value').addEventListener('keydown', function(e) {
         if (e.keyCode === 13) {
             // можете делать все что угодно со значением текстового поля
@@ -130,6 +150,13 @@ function deleteTask (){
     });
 })();
 
+function deleteList(){
+    let elems = document.getElementsByTagName("LI");
+    let el;
+    while ((el = elems[0])) {
+        el.parentNode.removeChild(el);
+    }
+}
 
 </script>
 </body>
