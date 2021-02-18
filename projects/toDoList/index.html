@@ -112,16 +112,85 @@ body{
     </ol>
 
 <script>
-  let id = 0;
+  //(function create())
+//localStorage.clear();
 
-function addTask(){
-    if (document.getElementById('value').value !== ''){
-    id++;
-        let task = document.getElementById('value').value;
+//alert(localStorage.getItem('numId'))
+
+
+console.log(localStorage)
+    let objCopy = {}; // objCopy будет хранить копию mainObj
+
+    for (let key in localStorage) {
+
+        if (!localStorage.hasOwnProperty(key)) {
+            continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+        }
+
+        if (key === 'numId') {
+            continue;
+        }
+
+        objCopy[key] = localStorage[key]; // копирует каждое свойство objCopy
+    }
+
+
+
+let arr = Object.values(objCopy);
+arr.sort((a,b) => {
+    if( typeof a[0] === 'number'){ return a[0] - b[0]}
+})
+    .forEach((i,index) => addTask(index, i))
+
+
+console.log(arr);
+
+  /* for(let key in localStorage) {
+        if (!localStorage.hasOwnProperty(key)) {
+            continue; // пропустит такие ключи, как "setItem", "getItem" и так далее
+        }
+
+        if (key === 'numId') {
+            continue;
+        }
+        //alert(key);
+        //alert(typeof localStorage.getItem(key));
+        //alert(`${key}: ${localStorage.getItem(key)}`);
+        //alert(key);
+        addTask(key,localStorage.getItem(key));
+    }*/
+
+
+
+function addTask(idElem, text){
+    //if (document.getElementById('value').value !== '')
+    //alert(idElem)
+    //alert(text)
+    if ( idElem ) {return  add(idElem, text)}
+
+    let id = localStorage.getItem('numId');
+
+    if ( id === null) { id = 0;  return add(id, text)}
+    return add(++id, text);
+
+}
+
+function add(id, text){
+    //id++;
+    //alert(id);
+    //alert(text)
+    if( typeof text !== 'undefined'){ return body(text)}
+
+
+    let task = document.getElementById('value').value;
+     body(task);
+     saveAtStorage(id,task);
+
+    function body(text) {
         let node = document.createElement("LI");
         node.id = id.toString();
         node.className = "task";
-        let textNode = document.createTextNode(task);
+        let textNode = document.createTextNode(text);
         node.appendChild(textNode);
 
         let deleteButton = document.createElement('input')
@@ -131,14 +200,37 @@ function addTask(){
         deleteButton.onclick = deleteTask;
         deleteButton.className = "deleteButton";
 
-        let row = document.getElementById("demo").appendChild(node).appendChild(deleteButton);
+        document.getElementById("demo").appendChild(node).appendChild(deleteButton);
+
+        //localStorage.setItem(`${id.toString()}`, text);
+        //localStorage.setItem('numId', id.toString());
 
         document.getElementById('value').value = '';
-        localStorage.setItem(`${id.toString()}`, row)
+
     }
 }
+
+function saveAtStorage(id,text){
+    localStorage.setItem(`${id.toString()}`, text);
+    localStorage.setItem('numId', id.toString());
+}
+
+
+
 function deleteTask (){
     document.getElementById(this.id).remove();
+    alert(`${this.id}`)
+
+    let target = arr[this.id]
+        let i = localStorage.length;
+        while (i-- > 0) {
+            let key = localStorage.key(i);
+            if (localStorage.getItem(key) === target) {
+                localStorage.removeItem(key);
+            }
+        }
+
+
 }
 
 (function keyEnter() {
@@ -151,12 +243,14 @@ function deleteTask (){
 })();
 
 function deleteList(){
+    localStorage.clear();
     let elems = document.getElementsByTagName("LI");
     let el;
     while ((el = elems[0])) {
         el.parentNode.removeChild(el);
     }
 }
+
 
 </script>
 </body>
